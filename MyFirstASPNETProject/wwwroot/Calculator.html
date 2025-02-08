@@ -1,14 +1,10 @@
 ﻿
-<!--Benson Kim-->
-<!--Warning to TA. when you go to my website, you have to type /index.html after because I couldnt get it to work automatically. I watched 
-    his video of how to do it but still couldn't get it to work. But it isn't on the rubric so I don't worry about it but
-    i want you guys to be able to find my website!'-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benson's Basketball</title>
+    <title>Benson's Basketball - Tutoring Calculator</title>
     <!-- Custom basketball icon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='90' font-size='90'>🏀</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@500&display=swap" rel="stylesheet">
@@ -40,13 +36,6 @@
             text-align: center;
         }
 
-            section img {
-                border-radius: 10px;
-                margin: 10px;
-                max-width: 100%;
-                height: auto;
-            }
-
             section p {
                 font-size: 18px;
                 line-height: 1.6;
@@ -54,6 +43,36 @@
                 max-width: 800px;
                 margin: 0 auto;
             }
+
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            width: 100px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            button:hover {
+                background-color: #004999;
+            }
+
+        #total {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
 
         nav a {
             display: inline-block;
@@ -70,21 +89,21 @@
             nav a:hover {
                 background-color: #004999;
             }
+
         footer {
             background-color: #333;
             color: white;
             text-align: center;
-            padding: .3px 0; 
+            padding: .3px 0;
             position: fixed;
             width: 100%;
             bottom: 0;
-            font-size: 8px; 
+            font-size: 8px;
         }
 
 
             footer p {
                 font-size: 8px;
-            }
     </style>
 </head>
 
@@ -96,21 +115,25 @@
     </header>
 
     <section>
-        <!-- At least two images -->
-        <img src="AD.jpg" alt="Basketball Player 1" width="300" />
-        <img src="Luka.jpeg" alt="Basketball Player 2" width="300" />
+        <h2>Calculate Your Tutoring Fee</h2>
 
-        <!-- A few paragraphs talking about your hobby -->
-        <p>Basketball is one of my favorite hobbies. I enjoy playing pickup games with friends and following the NBA.</p>
-        <p>It helps me stay active, develop teamwork skills, and improve my strategic thinking.</p>
-        <p>The adrenaline rush from making a great play or scoring a crucial basket is an unmatched feeling.</p>
-        <p>Basketball also brings people together, whether it's playing at a local gym or watching a game with friends.</p>
+        <!-- Input for hours -->
+        <label for="hours">Enter hours needed:</label>
+        <input type="number" id="hours" min="1" required>
 
-        <!-- Navigation to the second page -->
+        <!-- Fixed hourly rate -->
+        <label for="rate">Hourly Rate:</label>
+        <input type="text" id="rate" value="20" readonly>
+
+        <!-- Calculate button -->
+        <button id="calculate">Calculate Total</button>
+
+        <!-- Output total fee -->
+        <p>Total Cost: $<span id="total">0</span></p>
+
+        <!-- Back to home -->
         <nav>
-            <p>Want to Become Better At Basketball?</p>
-            <p>Click the button below to learn from me!</p>
-            <a href="Calculator.html">Go to Tutoring Calculator</a>
+            <a href="index.html">Back to Home</a>
         </nav>
     </section>
 
@@ -119,5 +142,27 @@
         <p>&copy; 2025 My Basketball Page | Built by Benson Kim</p>
     </footer>
 
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#calculate").click(function () {
+                let hours = parseFloat($("#hours").val());
+                let rate = parseFloat($("#rate").val());
+
+                // Validation
+                if (isNaN(hours) || hours <= 0) {
+                    alert("Please enter a valid positive number of hours.");
+                    return;
+                }
+
+                let total = hours * rate;
+                $("#total").text(total.toFixed(2));
+            });
+        });
+    </script>
+
 </body>
+
 </html>
